@@ -1,1 +1,35 @@
 <h1>Weather App</h1>
+
+<form action="">
+    <input type="text" name="city" placeholder="Enter a city">
+    <input type="submit" value="Submit">
+</form>
+
+
+{% if messages %}
+{% for message in messages %}
+<script>
+setTimeout(function(){   
+document.getElementById('message').style.display = 'none';
+}, 3000);
+</script>
+    <div id="message">    
+        {{ message }}
+        </div>
+        {% endfor %}
+{% endif %}
+
+
+{% for city in weather_data %}
+<div>
+<p>{{city.city.name}}</p>
+<p>{{city.temp}}<span>&#8451;</span></p>
+<img src="http://openweathermap.org/img/wn/{{city.icon}}.png" alt="icon"> 
+<p>{{city.description}}</p>
+<p>{{city.city.id}}</p>
+<button>
+       <a href="{% url 'delete' city.city.id %}">Delete</a> 
+    </button>
+    </div>
+{% endfor %}
+    
